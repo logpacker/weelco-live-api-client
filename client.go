@@ -21,7 +21,7 @@ type Stream struct {
 	Hash           string `json:"hash"`
 	Name           string `json:"name"`
 	OwnerID        uint64 `json:"owner_id"`
-	URL            string `json:"url"`
+	OutputURL      string `json:"output_url"`
 	OutputNodeAddr string `json:"output_node_addr"`
 }
 
