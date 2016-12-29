@@ -17,12 +17,13 @@ type Client struct {
 
 // Stream struct
 type Stream struct {
-	ID             int64  `json:"id"`
-	Hash           string `json:"hash"`
-	Name           string `json:"name"`
-	OwnerID        uint64 `json:"owner_id"`
-	OutputURL      string `json:"output_url"`
-	OutputNodeAddr string `json:"output_node_addr"`
+	ID                 int64  `json:"id"`
+	Hash               string `json:"hash"`
+	Name               string `json:"name"`
+	OwnerID            uint64 `json:"owner_id"`
+	OutputURL          string `json:"output_url"`
+	OutputNodeAddr     string `json:"output_node_addr"`
+	StreamingInputAddr string `json:"stream_input_addr"`
 }
 
 type errorResponse struct {
