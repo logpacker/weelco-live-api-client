@@ -36,6 +36,13 @@ func New(addr string) *Client {
 	return c
 }
 
+// GetStreams returns all streams
+func (c *Client) GetStreams() ([]*Stream, error) {
+	s := []*Stream{}
+	err := c.api("/streams", "GET", "", &s)
+	return s, err
+}
+
 // GetStream returns stream by hash
 func (c *Client) GetStream(hash string) (*Stream, error) {
 	s := new(Stream)
