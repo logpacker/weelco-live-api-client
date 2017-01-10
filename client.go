@@ -20,6 +20,7 @@ type Stream struct {
 	ID                 int64  `json:"id"`
 	Hash               string `json:"hash"`
 	Name               string `json:"name"`
+	Status             int64  `json:"status"`
 	OwnerID            uint64 `json:"owner_id"`
 	OutputURL          string `json:"output_url"`
 	OutputNodeAddr     string `json:"output_node_addr"`

@@ -3,7 +3,6 @@ package client
 import (
 	"fmt"
 	"testing"
-	"time"
 )
 
 func TestNew(t *testing.T) {
@@ -14,8 +13,9 @@ func TestNew(t *testing.T) {
 	fmt.Printf("Stream: %v, Error: %v\n", s, e)
 
 	// Update stream's info
-	s.OutputURL = fmt.Sprintf("http://127.0.0.1:1935/%d", time.Now().Unix())
-	s.OutputNodeAddr = fmt.Sprintf("http://127.0.0.1:1936/%d", time.Now().Unix())
+	s.OutputURL = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8"
+	s.OutputNodeAddr = "localhost"
+	s.Status = 1
 	e = c.UpdateStream(s)
 	fmt.Printf("Stream: %v, Error: %v\n", s, e)
 }
