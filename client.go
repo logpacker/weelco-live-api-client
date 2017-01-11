@@ -54,7 +54,7 @@ func (c *Client) CreateStream(s *Stream) error {
 	if s == nil {
 		return fmt.Errorf("Sttream is empty")
 	}
-	return c.api(fmt.Sprintf("/streams/create?name=%s&owner_id=%d", s.Name, s.OwnerID), "POST", "", nil)
+	return c.api(fmt.Sprintf("/streams/new?name=%s&owner_id=%d", s.Name, s.OwnerID), "POST", "", nil)
 }
 
 // GetStreams returns all streams
