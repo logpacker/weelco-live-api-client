@@ -30,6 +30,13 @@ type Stream struct {
 	CurrentWatchers    uint64    `json:"current_watchers"`
 }
 
+// StatusStr var
+var StatusStr = map[int64]string{
+	0: "New",
+	1: "Running",
+	2: "Stopped",
+}
+
 type errorResponse struct {
 	Message string `json:"message"`
 }
