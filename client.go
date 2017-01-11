@@ -49,6 +49,14 @@ func New(addr string) *Client {
 	return c
 }
 
+// CreateStream creates Stream, only Name and OwnerID is used here
+func (c *Client) CreateStream(s *Stream) error {
+	if s == nil {
+		return fmt.Errorf("Sttream is empty")
+	}
+	return c.api(fmt.Sprintf("/streams/create?name=%s&owner_id=%d", s.Name, s.OwnerID), "POST", "", nil)
+}
+
 // GetStreams returns all streams
 func (c *Client) GetStreams() ([]*Stream, error) {
 	s := []*Stream{}
@@ -69,6 +77,9 @@ func (c *Client) GetStream(hash string) (*Stream, error) {
 
 // UpdateStream updates Stream
 func (c *Client) UpdateStream(s *Stream) error {
+	if s == nil {
+		return fmt.Errorf("Sttream is empty")
+	}
 	streamBytes, _ := json.Marshal(s)
 	return c.api(fmt.Sprintf("/streams/update?hash=%s", s.Hash), "POST", string(streamBytes), nil)
 }

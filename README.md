@@ -5,6 +5,10 @@
 ```go
 // Live API addr
 c := client.New("https://as.weelco.com/liveapi")
+// Create sream
+c.CreateStream(*client.Stream{
+    Name: "test",
+})
 // Get stream by hash
 s, _ := c.GetStream("HASH")
 // Update output addr
