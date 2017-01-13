@@ -17,18 +17,18 @@ type Client struct {
 
 // Stream struct
 type Stream struct {
-	ID                 int64     `json:"id"`
-	Hash               string    `json:"hash"`
-	Name               string    `json:"name"`
-	Status             int64     `json:"status"`
-	StatusString       string    `json:"status_str"`
-	OwnerID            uint64    `json:"owner_id"`
-	OutputURL          string    `json:"output_url"`
-	OutputNodeAddr     string    `json:"output_node_addr"`
-	StreamingInputAddr string    `json:"stream_input_addr"`
-	StartTime          time.Time `json:"start_time"`
-	StopTime           time.Time `json:"stop_time"`
-	CurrentWatchers    uint64    `json:"current_watchers"`
+	ID                 int64      `json:"id"`
+	Hash               string     `json:"hash"`
+	Name               string     `json:"name"`
+	Status             int64      `json:"status"`
+	StatusString       string     `json:"status_str"`
+	OwnerID            uint64     `json:"owner_id"`
+	OutputURL          string     `json:"output_url"`
+	OutputNodeAddr     string     `json:"output_node_addr"`
+	StreamingInputAddr string     `json:"stream_input_addr"`
+	StartTime          *time.Time `json:"start_time"`
+	StopTime           *time.Time `json:"stop_time"`
+	CurrentWatchers    uint64     `json:"current_watchers"`
 }
 
 type errorResponse struct {
