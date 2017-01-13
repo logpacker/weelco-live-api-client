@@ -52,7 +52,7 @@ func New(addr string) *Client {
 // CreateStream creates Stream, only Name and OwnerID is used here
 func (c *Client) CreateStream(s *Stream) error {
 	if s == nil {
-		return fmt.Errorf("Sttream is empty")
+		return fmt.Errorf("Stream is empty")
 	}
 	return c.api(fmt.Sprintf("/streams/new?name=%s&owner_id=%d", s.Name, s.OwnerID), "POST", "", nil)
 }
@@ -75,13 +75,18 @@ func (c *Client) GetStream(hash string) (*Stream, error) {
 	return s, err
 }
 
-// UpdateStream updates Stream
-func (c *Client) UpdateStream(s *Stream) error {
-	if s == nil {
-		return fmt.Errorf("Sttream is empty")
-	}
-	streamBytes, _ := json.Marshal(s)
-	return c.api(fmt.Sprintf("/streams/update?hash=%s", s.Hash), "POST", string(streamBytes), nil)
+// Start updates status to Running and sets OutputURL, OutputNodeAddr, StartTime
+func (c *Client) Start(hash string, outputURL string, outputNodeAddr string) error {
+	streamBytes, _ := json.Marshal(Stream{
+		OutputURL:      outputURL,
+		OutputNodeAddr: outputNodeAddr,
+	})
+	return c.api(fmt.Sprintf("/streams/start?hash=%s", hash), "POST", string(streamBytes), nil)
+}
+
+// Stop updates status to Stopped and sets StopTime
+func (c *Client) Stop(hash string) error {
+	return c.api(fmt.Sprintf("/streams/stop?hash=%s", hash), "POST", "", nil)
 }
 
 func (c *Client) api(endpoint string, method string, dataStr string, v interface{}) error {
