@@ -21,7 +21,7 @@ type Stream struct {
 	Hash               string    `json:"hash"`
 	Name               string    `json:"name"`
 	Status             int64     `json:"status"`
-	StatusString       string    `json:"-"`
+	StatusString       string    `json:"status_str"`
 	OwnerID            uint64    `json:"owner_id"`
 	OutputURL          string    `json:"output_url"`
 	OutputNodeAddr     string    `json:"output_node_addr"`
@@ -29,13 +29,6 @@ type Stream struct {
 	StartTime          time.Time `json:"start_time"`
 	StopTime           time.Time `json:"stop_time"`
 	CurrentWatchers    uint64    `json:"current_watchers"`
-}
-
-// StatusStr var
-var StatusStr = map[int64]string{
-	0: "New",
-	1: "Running",
-	2: "Stopped",
 }
 
 type errorResponse struct {
@@ -61,16 +54,12 @@ func (c *Client) CreateStream(s *Stream) error {
 func (c *Client) GetStreams() ([]*Stream, error) {
 	s := []*Stream{}
 	err := c.api("/streams", "GET", "", &s)
-	for _, stream := range s {
-		stream.StatusString = StatusStr[stream.Status]
-	}
 	return s, err
 }
 
 // GetStream returns stream by hash
 func (c *Client) GetStream(hash string) (*Stream, error) {
 	s := new(Stream)
-	s.StatusString = StatusStr[s.Status]
 	err := c.api(fmt.Sprintf("/streams/find?hash=%s", hash), "GET", "", &s)
 	return s, err
 }
