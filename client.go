@@ -24,7 +24,8 @@ type Stream struct {
 	StatusString       string     `json:"status_str"`
 	OwnerID            uint64     `json:"owner_id"`
 	OutputURL          string     `json:"output_url"`
-	OutputNodeAddr     string     `json:"output_node_addr"`
+	AdvertisedHost     string     `json:"advertised_host"`
+	ControlQueue       string     `json:"control_queue"`
 	StreamingInputAddr string     `json:"stream_input_addr"`
 	StartTime          *time.Time `json:"start_time"`
 	StopTime           *time.Time `json:"stop_time"`
@@ -64,11 +65,12 @@ func (c *Client) GetStream(hash string) (*Stream, error) {
 	return s, err
 }
 
-// Start updates status to Running and sets OutputURL, OutputNodeAddr, StartTime
-func (c *Client) Start(hash string, outputURL string, outputNodeAddr string) error {
+// Start updates status to Running and sets OutputURL, AdvertisedHost, ControlQueue, StartTime
+func (c *Client) Start(hash string, outputURL string, advertisedHost string, controlQueue string) error {
 	streamBytes, _ := json.Marshal(Stream{
 		OutputURL:      outputURL,
-		OutputNodeAddr: outputNodeAddr,
+		AdvertisedHost: advertisedHost,
+		ControlQueue:   controlQueue,
 	})
 	return c.api(fmt.Sprintf("/streams/start?hash=%s", hash), "POST", string(streamBytes), nil)
 }
