@@ -80,6 +80,11 @@ func (c *Client) Stop(hash string) error {
 	return c.api(fmt.Sprintf("/streams/stop?hash=%s", hash), "POST", "", nil)
 }
 
+// Delete func
+func (c *Client) Delete(hash string) error {
+	return c.api(fmt.Sprintf("/streams/delete?hash=%s", hash), "POST", "", nil)
+}
+
 // StopTranscoding sends request to transcoder to stop stream. Transcoder will update status after that
 func (c *Client) StopTranscoding(hash string) error {
 	return c.api(fmt.Sprintf("/streams/transcoder/stop?hash=%s", hash), "POST", "", nil)
