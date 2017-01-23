@@ -30,6 +30,7 @@ type Stream struct {
 	StartTime          *time.Time `json:"start_time"`
 	StopTime           *time.Time `json:"stop_time"`
 	CurrentWatchers    uint64     `json:"current_watchers"`
+	RecordingEnabled   bool       `json:"recording_enabled"`
 }
 
 type errorResponse struct {
@@ -48,7 +49,11 @@ func (c *Client) CreateStream(s *Stream) error {
 	if s == nil {
 		return fmt.Errorf("Stream is empty")
 	}
-	return c.api(fmt.Sprintf("/streams/new?name=%s&owner_id=%d", s.Name, s.OwnerID), "POST", "", nil)
+	r := 0
+	if s.RecordingEnabled {
+		r = 1
+	}
+	return c.api(fmt.Sprintf("/streams/new?name=%s&owner_id=%d&recording_enabled=%d", s.Name, s.OwnerID, r), "POST", "", nil)
 }
 
 // GetStreams returns all streams
